@@ -1,16 +1,28 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Статический экспорт для GitHub Pages
+  // 1. Говорим Next.js собрать чистый статический сайт (HTML/CSS/JS)
   output: "export",
-  distDir: "out", // создаем папку ./out для артефакта
-  basePath: "/obskura-film", // важно для GitHub Pages
-  images: { unoptimized: true }, // GitHub Pages не оптимизирует картинки
+  
+  // 2. Указываем имя папки, куда сложить готовый сайт
+  distDir: ".next-export",
+  
+  // 3. ВАЖНО: Указываем имя вашего репозитория для правильных ссылок
+  basePath: "/obskura-film",
+  
+  // 4. Отключаем оптимизацию картинок (GitHub Pages это не поддерживает)
+  images: {
+    unoptimized: true,
+  },
+  
+  // 5. Добавляем слэш в конце URL для корректной работы роутинга
   trailingSlash: true,
   
+  // 6. Игнорируем мелкие ошибки TypeScript при сборке
   typescript: {
     ignoreBuildErrors: true,
   },
+  
   reactStrictMode: false,
 };
 

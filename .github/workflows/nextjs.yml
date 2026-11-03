@@ -29,14 +29,13 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build with Next.js (Static Export)
-        # ВАЖНО: передаем переменные, которые ждет ваш next.config.ts
-        run: NEXT_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/obskura-film bun run build
+      - name: Build with Next.js
+        run: bun run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ВАЖНО: в вашем конфиге указано distDir: ".next-export"
+          # Здесь мы указываем ту самую папку, которую создаст next.config.ts
           path: ./.next-export
 
   deploy:

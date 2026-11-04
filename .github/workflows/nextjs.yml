@@ -30,12 +30,13 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build with Next.js
-        run: bun run build
+        # ВАЖНО: передаём NEXT_PUBLIC_BASE_PATH для функции asset()
+        # и NEXT_EXPORT=1 для статического экспорта
+        run: NEXT_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/obskura-film bun run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Здесь мы указываем ту самую папку, которую создаст next.config.ts
           path: ./.next-export
 
   deploy:
